@@ -1,0 +1,36 @@
+import numpy as np
+# Subject scores for 3 students
+math = np.array([70,85,60])
+english = np.array([75,80,65])
+science = np.array([90,78,70])
+# Stack scores : rows = students, columns = subjects
+scores = np.stack((math, english, science), axis = 1)
+#Total and average scores
+total_scores = scores.sum(axis=1)
+average_scores = scores.mean(axis=1)
+#Pass or Fail (average>=70)
+status = np.where(average_scores >= 70, "Pass", "Fail")
+# Sort students by total score (highest first)
+order = np.argsort(total_scores)[::-1]
+sorted_scores = scores[order]
+sorted_totals = total_scores[order]
+sorted_averages = average_scores[order]
+sorted_status = status[order]
+# Unique scores across all subjects
+unique_scores = np.unique(scores)
+#Display results
+print("scores(math,english,science):")
+print(scores)
+print("\nTotal Scores:")
+print(total_scores)
+print("\nAverage Scores:")
+print(average_scores)
+print("\nStatus:")
+print(status)
+print("\nSorted Results(Highest Total First):")
+for i in range(len(sorted_totals)):
+	print(f"Student {i +1}: Total ={sorted_totals[i]},"
+	f"Average= {round(sorted_averages[i],2)},"
+	f"Status = {sorted_status[i]}")
+print("\nUnique Scores:")
+print(unique_scores)
